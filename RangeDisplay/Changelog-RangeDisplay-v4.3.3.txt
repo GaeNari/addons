@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r370 | mitch0 | 2015-07-06 15:27:47 +0000 (Mon, 06 Jul 2015) | 1 line
+Changed paths:
+   A /tags/v4.3.3 (from /trunk:369)
+
+Tagging as v4.3.3
+------------------------------------------------------------------------
+r369 | mitch0 | 2015-07-06 13:20:30 +0000 (Mon, 06 Jul 2015) | 1 line
+Changed paths:
+   M /trunk/RangeDisplay.toc
+   M /trunk/RangeDisplay_Options/RangeDisplay_Options.toc
+
+toc bump for 6.2
+------------------------------------------------------------------------

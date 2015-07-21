@@ -1,0 +1,19 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+<Script file="Modules\Aggro.lua"/>
+<Script file="Modules\ClickCasting.lua"/>
+<Script file="Modules\Text.lua"/>
+<Script file="Modules\Icons.lua"/>
+<Script file="Modules\RaidIcon.lua"/>
+<Script file="Modules\CastingBar.lua"/>
+<Script file="Modules\PowerBarAlt.lua"/>
+<Script file="Modules\ReadyCheck.lua"/>
+<Script file="Modules\Buff.lua"/>
+<Script file="Modules\Debuff.lua"/>
+<Script file="Modules\SurvivalSkill.lua"/>
+<Script file="Modules\SpellTimer.lua"/>
+<Script file="Modules\CastingSent.lua"/>
+<Script file="Modules\Resurrection.lua"/>
+
+</Ui>

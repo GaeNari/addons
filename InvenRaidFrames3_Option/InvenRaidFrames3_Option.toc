@@ -1,0 +1,10 @@
+## Interface: 60200
+## Title: Inven Raid Frames 3: Option
+## Notes: 인벤 레이드 프레임 3: 옵션창
+## Dependencies: InvenRaidFrames3
+## LoadOnDemand: 1
+
+libs\LibBlueOption-1.0\LibBlueOption-1.0.xml
+menus.xml
+Preview.lua
+Core.lua

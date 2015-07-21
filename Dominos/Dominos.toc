@@ -1,0 +1,34 @@
+## Interface: 60200
+## Title: Dominos
+## Notes: A main actionbar replacement
+## Author: Tuller
+## Version: 6.2.5
+## SavedVariables: DominosDB, DominosVersion
+## OptionalDeps: Ace3, LibKeyBound-1.0, Masque, FlyPaper
+embeds.xml
+localization.xml
+Dominos.lua
+core\helpers.lua
+core\events.lua
+core\frame.lua
+core\buttonBar.lua
+core\configOverlay.lua
+core\bindableButton.lua
+core\fadeManager.lua
+core\overrideController.lua
+core\tooltipController.lua
+core\bindingsController.lua
+bars\barStates.lua
+bars\multiActionBarFixer.lua
+bars\actionButton.lua
+bars\actionBar.lua
+bars\petBar.lua
+bars\stanceBar.lua
+bars\bagBar.lua
+bars\menuBar.lua
+bars\extraActionBar.lua
+bars\vehicleBar.lua
+plugins\slashCommands.lua
+plugins\launcher.lua
+plugins\blizzardHider.lua
+plugins\buttonThemer.lua

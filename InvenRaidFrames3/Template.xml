@@ -1,0 +1,630 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Button name="InvenRaidFrames3BaseTemplate" useParentLevel="true" hidden="true" virtual="true">
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="$parentHighlight" file="Interface\QuestFrame\UI-QuestTitleHighlight" parentKey="highlight" setAllPoints="true" forceAlpha="true" alphaMode="ADD" hidden="true"/>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame parentKey="outline" useParentLevel="true" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="-3" y="2"/>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset x="3" y="-2"/>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Addons\InvenRaidFrames3\Texture\Border.tga">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+		</Frames>
+		<Attributes>
+			<Attribute name="*type1" type="string" value="target"/>
+			<Attribute name="*type2" type="string" value="menu"/>
+			<Attribute name="toggleForVehicle" type="boolean" value="true"/>
+		</Attributes>
+		<Scripts>
+			<OnEnter function="InvenRaidFrames3Member_OnEnter"/>
+			<OnLeave function="InvenRaidFrames3Member_OnLeave"/>
+			<OnDragStart function="InvenRaidFrames3Member_OnDragStart"/>
+			<OnDragStop function="InvenRaidFrames3Member_OnDragStop"/>
+		</Scripts>
+	</Button>
+	<Button name="InvenRaidFrames3PetTemplate" inherits="SecureUnitButtonTemplate,InvenRaidFrames3BaseTemplate" useParentLevel="true" hidden="true" virtual="true">
+		<Size x="0" y="0.1"/>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"/>
+			<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" parentKey="background" setAllPoints="true" forceAlpha="true"/>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentOverAbsorbGlow" parentKey="overAbsorbGlow"/>
+			</Layer>
+		</Layers>
+		<Frames>
+			<StatusBar name="$parentPowerBar" parentKey="powerBar" useParentLevel="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+						<Offset x="0" y="3"/>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="$parentHealthBar" parentKey="healthBar" useParentLevel="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="0" y="-1"/>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentPowerBar" relativePoint="TOPRIGHT"/>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="$parentMyHealPredictionBar" parentKey="myHealPredictionBar" useParentLevel="true"/>
+			<StatusBar name="$parentOtherHealPredictionBar" parentKey="otherHealPredictionBar" useParentLevel="true"/>
+			<StatusBar name="$parentAbsorbPredictionBar" parentKey="absorbPredictionBar" useParentLevel="true"/>
+			<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" parentKey="dropDown" hidden="true">
+				<Size>
+					<AbsDimension x="10" y="10"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="10" y="-60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Attributes>
+			<Attribute name="unitsuffix" type="string" value="pet"/>
+			<Attribute name="_childupdate-usepet" type="string" value="self:SetAttribute('useparent-unit', message)"/>
+			<Attribute name="_childupdate-petheight" type="string" value="self:SetHeight(message)"/>
+			<Attribute name="_childupdate-clearallpoints" type="string" value="self:ClearAllPoints()"/>
+		</Attributes>
+		<Scripts>
+			<OnLoad function="InvenRaidFrames3Pet_OnLoad"/>
+			<OnShow function="InvenRaidFrames3Pet_OnShow"/>
+			<OnHide function="InvenRaidFrames3Pet_OnHide"/>
+		</Scripts>
+	</Button>
+	<Frame name="InvenRaidFrames3DebuffIconTemplate" virtual="true" enableMouse="false">
+		<Size x="0.001" y="0.001"/>
+		<Layers>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture parentKey="color"/>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<Texture parentKey="icon">
+					<TexCoords left="0.07" right="0.93" top="0.07" bottom="0.93"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<FontString inherits="NumberFontNormalSmall" parentKey="count" maxLines="1">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnUpdate function="InvenRaidFrames3Member_AuraIconOnUpdate"/>
+		</Scripts>
+	</Frame>
+	<Frame name="InvenRaidFrames3SpellTimerTemplate" useParentLevel="true" hidden="true" virtual="true">
+		<Size x="13" y="13"/>
+		<Layers>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<Texture name="$parentIcon" parentKey="icon">
+					<Size x="13" y="13"/>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0.07" right="0.93" top="0.07" bottom="0.93"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<FontString inherits="GameFontHighlight" parentKey="timer" maxLines="1">
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentIcon" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="NumberFontNormalSmall" parentKey="count" maxLines="1">
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parentIcon" relativePoint="CENTER">
+							<Offset>
+								<AbsDimension x="2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Button name="InvenRaidFrames3MemberBaseTemplate" inherits="SecureUnitButtonTemplate,InvenRaidFrames3BaseTemplate" hidden="true" virtual="true">
+		<Size x="0.1" y="0.1"/>
+		<Attributes>
+			<Attribute name="_childupdate-clearallpoints" type="string" value="self:ClearAllPoints()"/>
+			<Attribute name="_childupdate-width" type="string" value="self:SetWidth(message)"/>
+			<Attribute name="_childupdate-height" type="string" value="self:SetHeight(message)"/>
+		</Attributes>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" parentKey="background" setAllPoints="true" forceAlpha="true"/>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentName" parentKey="name" inherits="GameFontHighlightSmall" maxLines="1"/>
+				<FontString name="$parentLostText" parentKey="losttext" inherits="GameFontHighlightSmall" maxLines="1"/>
+				<Texture name="$parentRoleIcon" hidden="true" parentKey="roleIcon"/>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<Texture name="$parentRaidIcon1" parentKey="raidIcon1" file="Interface\TargetingFrame\UI-RaidTargetingIcons" hidden="true">
+					<Size x="0.001" y="0.001"/>
+				</Texture>
+				<Texture name="$parentRaidIcon2" parentKey="raidIcon2" file="Interface\TargetingFrame\UI-RaidTargetingIcons" hidden="true">
+					<Size x="0.001" y="0.001"/>
+				</Texture>
+				<Texture name="$parentBuffIcon1" parentKey="buffIcon1" hidden="true">
+					<Size x="0.001" y="0.001"/>
+					<TexCoords left="0.07" right="0.93" top="0.07" bottom="0.93"/>
+				</Texture>
+				<Texture name="$parentBuffIcon2" parentKey="buffIcon2" hidden="true">
+					<Size x="0.001" y="0.001"/>
+					<TexCoords left="0.07" right="0.93" top="0.07" bottom="0.93"/>
+				</Texture>
+				<Texture name="$parentHealIcon" parentKey="healIcon" file="Interface\ChatFrame\ChatFrameColorSwatch" hidden="true">
+					<Size x="0.001" y="0.001"/>
+				</Texture>
+				<Texture name="$parentOverAbsorbGlow" parentKey="overAbsorbGlow"/>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="4">
+				<Texture name="$parentReadyCheckIcon" parentKey="readyCheckIcon" forceAlpha="true"/>
+			</Layer>
+		</Layers>
+		<Frames>
+			<StatusBar name="$parentHealthBar" parentKey="healthBar" useParentLevel="true">
+				<Layers>
+					<Layer level="BACKGROUND" textureSubLevel="2">
+						<Texture name="$parentBackground" parentKey="background" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</StatusBar>
+			<StatusBar name="$parentPowerBar" parentKey="powerBar" useParentLevel="true">
+				<Layers>
+					<Layer level="BACKGROUND" textureSubLevel="2">
+						<Texture name="$parentBackground" parentKey="background" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</StatusBar>
+			<StatusBar name="$parentMyHealPredictionBar" parentKey="myHealPredictionBar" useParentLevel="true"/>
+			<StatusBar name="$parentOtherHealPredictionBar" parentKey="otherHealPredictionBar" useParentLevel="true"/>
+			<StatusBar name="$parentAbsorbPredictionBar" parentKey="absorbPredictionBar" useParentLevel="true"/>
+			<Frame name="$parentDebuffIcon1" parentKey="debuffIcon1" inherits="InvenRaidFrames3DebuffIconTemplate"/>
+			<Frame name="$parentDebuffIcon2" parentKey="debuffIcon2" inherits="InvenRaidFrames3DebuffIconTemplate"/>
+			<Frame name="$parentDebuffIcon3" parentKey="debuffIcon3" inherits="InvenRaidFrames3DebuffIconTemplate"/>
+			<Frame name="$parentDebuffIcon4" parentKey="debuffIcon4" inherits="InvenRaidFrames3DebuffIconTemplate"/>
+			<Frame name="$parentDebuffIcon5" parentKey="debuffIcon5" inherits="InvenRaidFrames3DebuffIconTemplate"/>
+			<Frame name="$parentSpellTimer1" parentKey="spellTimer1" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer2" parentKey="spellTimer2" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer3" parentKey="spellTimer3" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer4" parentKey="spellTimer4" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer5" parentKey="spellTimer5" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer6" parentKey="spellTimer6" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer7" parentKey="spellTimer7" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentSpellTimer8" parentKey="spellTimer8" inherits="InvenRaidFrames3SpellTimerTemplate"/>
+			<Frame name="$parentBossAura" parentKey="bossAura" hidden="true" enableMouse="false">
+				<Size x="0.001" y="0.001"/>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture parentKey="bg" setAllPoints="true">
+							<Color r="0" g="0" b="0" a="1"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<Texture name="$parentIcon" parentKey="icon">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="1" y="-1"/>
+								<Anchor point="BOTTOMRIGHT" x="-1" y="1"/>
+							</Anchors>
+							<TexCoords left="0.07" right="0.93" top="0.07" bottom="0.93"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString inherits="NumberFontNormalSmall" parentKey="count" maxLines="1">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativeTo="$parentIcon" relativePoint="BOTTOMRIGHT" x="5" y="-2"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Cooldown parentKey="cooldown" inherits="CooldownFrameTemplate" reverse="true" hidden="true">
+						<Anchors>
+							<Anchor point="CENTER" x="0" y="-1"/>
+						</Anchors>
+					</Cooldown>
+					<Frame parentKey="timerParent" setAllPoints="true">
+						<Layers>
+							<Layer level="OVERLAY">
+								<FontString inherits="GameFontHighlight" parentKey="text" forceAlpha="true" maxLines="1">
+									<Anchors>
+										<Anchor point="TOPLEFT" x="0" y="0"/>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+				</Frames>
+				<Scripts>
+					<OnLoad function="InvenRaidFrames3Member_BossAuraOnLoad"/>
+					<OnUpdate function="InvenRaidFrames3Member_AuraIconOnUpdate"/>
+				</Scripts>
+			</Frame>
+			<Frame name="$parentCenterStatusIcon" parentKey="centerStatusIcon" hidden="true" enableMouse="false">
+				<Layers>
+					<Layer level="OVERLAY" textureSubLevel="10">
+						<Texture setAllPoints="true" parentKey="texture"/>
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="11">
+						<Texture setAllPoints="true" parentKey="border"/>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnUpdate function="InvenRaidFrames3Member_CenterStatusIconOnUpdate"/>
+					<OnHide function="InvenRaidFrames3Member_CenterStatusIconOnHide"/>
+				</Scripts>
+			</Frame>
+			<StatusBar name="$parentCastingBar" parentKey="castingBar" hidden="true"/>
+			<StatusBar name="$parentPowerBarAlt" parentKey="powerBarAlt" hidden="true"/>
+			<StatusBar name="$parentResurrectionBar" parentKey="resurrectionBar" useParentLevel="true" hidden="true" setAllPoints="true"/>
+			<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" parentKey="dropDown" hidden="true">
+				<Size>
+					<AbsDimension x="10" y="10"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="10" y="-60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame parentKey="topLevel" setAllPoints="true"/>
+		</Frames>
+		<Scripts>
+			<OnLoad function="InvenRaidFrames3Member_OnLoad"/>
+			<OnShow function="InvenRaidFrames3Member_OnShow"/>
+			<OnHide function="InvenRaidFrames3Member_OnHide"/>
+			<OnAttributeChanged function="InvenRaidFrames3Member_OnAttributeChanged"/>
+		</Scripts>
+	</Button>
+	<Button name="InvenRaidFrames3MemberTemplate" inherits="InvenRaidFrames3MemberBaseTemplate" virtual="true">
+		<Attributes>
+			<Attribute name="_childupdate-usepet" type="string" value="self:ChildUpdate(scriptid, message)"/>
+			<Attribute name="_childupdate-petheight" type="string" value="self:ChildUpdate(scriptid, message)"/>
+			<Attribute name="_childupdate-clearunit" type="string" value="self:SetAttribute('unit', nil)"/>
+		</Attributes>
+		<Frames>
+			<Button name="$parentPet" inherits="InvenRaidFrames3PetTemplate" parentKey="petButton"/>
+		</Frames>
+	</Button>
+	<Frame name="InvenRaidFrames3GroupHeaderTemplate" inherits="SecureGroupHeaderTemplate" hidden="true" useParentLevel="true" virtual="true">
+		<Attributes>
+			<Attribute name="template" type="string" value="InvenRaidFrames3MemberTemplate"/>
+			<Attribute name="sortMethod" type="string" value="NAME"/>
+			<Attribute name="maxColumns" type="number" value="1"/>
+			<Attribute name="unitsPerColumn" type="number" value="5"/>
+			<Attribute name="startingIndex" type="number" value="-4"/>
+			<Attribute name="_childupdate" type="string" value="self:ChildUpdate(scriptid, message)"/>
+		</Attributes>
+		<Frames>
+			<Frame name="$parentPartyTag" enableMouse="true" hidden="true" parentKey="partyTag" useParentLevel="true">
+				<Size x="0" y="12"/>
+				<Layers>
+					<Layer level="BORDER">
+						<Texture parentKey="tex" setAllPoints="true"/>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString parentKey="text" inherits="GameFontHighlightSmall" maxLines="1">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnDragStart function="InvenRaidFrames3Member_OnDragStart"/>
+					<OnDragStop function="InvenRaidFrames3Member_OnDragStop"/>
+					<OnHide function="InvenRaidFrames3Member_OnDragStop"/>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Frame>
+	<Frame name="InvenRaidFrames3Ping" parent="UIParent" frameStrata="MEDIUM" frameLevel="11" hidden="true">
+		<Size x="22" y="22"/>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="centerRing" file="Interface\minimap\UI-Minimap-Ping-Center">
+					<Size x="14" y="14"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="rotatingRing" file="Interface\minimap\UI-Minimap-Ping-Rotate">
+					<Size x="22" y="22"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="expandingRing" file="Interface\minimap\UI-Minimap-Ping-Expand">
+					<Size x="14" y="14"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Animations>
+			<AnimationGroup parentKey="Ping" looping="REPEAT">
+				<Rotation targetKey="$parent.$parent.rotatingRing" degrees="-180" duration="0.75" order="1"/>
+				<Scale targetKey="$parent.$parent.expandingRing" scaleX="1.75" scaleY="1.75" duration="0.75" order="1"/>
+				<Scripts>
+					<OnPlay function="WorldMapPing_OnPlay"/>
+					<OnLoop function="WorldMapPing_OnLoop"/>
+				</Scripts>
+			</AnimationGroup>
+		</Animations>
+		<Scripts>
+			<OnLoad>
+				InvenRaidFrames3.ping = self
+			</OnLoad>
+			<OnShow>
+				self:SetAlpha(1)
+				self.timer = 0
+				self.Ping:Play()
+
+			</OnShow>
+			<OnHide>
+				self.timer = nil
+				self.Ping:Stop()
+				self:Hide()
+			</OnHide>
+			<OnUpdate>
+				self.timer = self.timer + elapsed
+				if self.timer > 1 then
+					if self.timer > 1.5 then
+						self:Hide()
+					else
+						self:SetAlpha((1.5 - self.timer) * 2)
+					end
+				end
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Button name="InvenRaidFrames3ManagerGroupButtonTemplate" movable="true" dontSavePosition="true" clampedToScreen="true" inherits="CRFManagerFilterGroupButtonTemplate" virtual="true"/>
+	<Frame name="InvenRaidFrames3Manager" hidden="true" parent="UIParent" frameStrata="MEDIUM" frameLevel="10" enableMouse="true" dontSavePosition="true">
+		<Size x="186" y="147"/>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND" textureSubLevel="0">
+				<Texture name="$parentBorderTopLeft" file="Interface\RaidFrame\RaidPanel-UpperLeft">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-5" y="2"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderTopRight" file="Interface\RaidFrame\RaidPanel-UpperRight">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="5" y="2"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderBottomLeft" file="Interface\RaidFrame\RaidPanel-BottomLeft">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-5" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderBottomRight" file="Interface\RaidFrame\RaidPanel-BottomRight">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="5" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderTop" file="Interface\RaidFrame\RaidPanel-UpperMiddle" horizTile="true">
+					<Size x="0" y="16"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentBorderTopLeft" relativePoint="TOPRIGHT" x="0" y="1"/>
+						<Anchor point="TOPRIGHT" relativeTo="$parentBorderTopRight" relativePoint="TOPLEFT" x="0" y="1"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderBottom" file="Interface\RaidFrame\RaidPanel-BottomMiddle" horizTile="true">
+					<Size x="0" y="16"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBorderBottomLeft" relativePoint="BOTTOMRIGHT" x="0" y="-4"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBorderBottomRight" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderLeft" file="Interface\RaidFrame\RaidPanel-Left" vertTile="true">
+					<Size x="16" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentBorderTopLeft" relativePoint="BOTTOMLEFT" x="-1" y="0"/>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBorderBottomLeft" relativePoint="TOPLEFT" x="-1" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBorderRight" file="Interface\RaidFrame\RaidPanel-Right" vertTile="true">
+					<Size x="16" y="0"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentBorderTopRight" relativePoint="BOTTOMRIGHT" x="2" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBorderBottomRight" relativePoint="TOPRIGHT" x="2" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND" textureSubLevel="1">
+				<Texture name="$parentBg" parentKey="bg" file="Interface\FrameGeneral\UI-Background-Rock" horizTile="true" vertTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentBorderTopLeft" x="8" y="-6"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBorderBottomRight" x="-8" y="8"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentContent" parentKey="content" frameLevel="11" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentBg"/>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentBg"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentHeader" parentKey="header">
+							<Size x="0" y="17"/>
+							<Anchors>
+								<Anchor point="TOP"/>
+							</Anchors>
+							<Color r="0" b="0" g="0" a="0.93"/>
+						</Texture>
+					</Layer>
+					<Layer level="BORDER">
+						<Texture name="$parentHeaderLine" file="Interface\RaidFrame\RaidPanel-UpperMiddle" horizTile="true">
+							<Size x="0" y="12"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentHeader" relativePoint="BOTTOMLEFT" x="0" y="3"/>
+								<Anchor point="TOPRIGHT" relativeTo="$parentHeader" relativePoint="BOTTOMRIGHT" x="0" y="3"/>
+							</Anchors>
+						</Texture>
+						<Texture name="$parentGroupLine" parentKey="groupLine" file="Interface\RaidFrame\RaidPanel-UpperMiddle" horizTile="true">
+							<Size x="0" y="12"/>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentHeader" relativePoint="LEFT"/>
+								<Anchor point="RIGHT" relativeTo="$parentHeader" relativePoint="RIGHT"/>
+								<Anchor point="BOTTOM" relativeTo="CompactRaidFrameManagerDisplayFrameRaidMarkersRaidMarker1" relativePoint="TOP" x="0" y="-4"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString name="$parentRaidMembersLabel" inherits="GameFontNormal" text="공격대 관리자" parentKey="label" maxLines="1">
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentHeader" x="6" y="0"/>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentRaidMemberCountLabel" parentKey="memberCountLabel" justifyH="RIGHT" inherits="GameFontNormal" text="10/10" maxLines="1">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parentHeader" x="-6" y="0"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentLockButton" parentKey="lockButton" frameLevel="12" inherits="UIMenuButtonStretchTemplate" text="LOCK">
+						<Size x="0" y="20"/>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT"/>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM" x="-1" y="0"/>
+						</Anchors>
+					</Button>
+					<Button name="$parentHideButton" parentKey="hideButton" freamLevel="12" inherits="UIMenuButtonStretchTemplate" text="HIDE">
+						<Size x="0" y="20"/>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOM" x="1" y="0"/>
+							<Anchor point="BOTTOMRIGHT"/>
+						</Anchors>
+					</Button>
+					<Frame name="$parentPartyGroup" parentKey="partyGroup" frameLevel="11" hidden="true">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentHeaderLine" relativePoint="BOTTOM" x="0" y="5"/>
+							<Anchor point="LEFT" x="0" y="0"/>
+							<Anchor point="RIGHT" x="0" y="0"/>
+							<Anchor point="BOTTOM" relativeTo="$parentGroupLine" relativePoint="TOP" x="0" y="0"/>
+						</Anchors>
+						<Frames>
+							<Button name="$parent1" parentKey="group1" text="1" id="1" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent2" parentKey="group2" text="2" id="2" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent3" parentKey="group3" text="3" id="3" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent4" parentKey="group4" text="4" id="4" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent5" parentKey="group5" text="5" id="5" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent6" parentKey="group6" text="6" id="6" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent7" parentKey="group7" text="7" id="7" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent8" parentKey="group8" text="8" id="8" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+						</Frames>
+					</Frame>
+					<Frame name="$parentClassGroup" parentKey="classGroup" frameLevel="11" hidden="true">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentHeaderLine" relativePoint="BOTTOM" x="0" y="5"/>
+							<Anchor point="LEFT" x="0" y="0"/>
+							<Anchor point="RIGHT" x="0" y="0"/>
+							<Anchor point="BOTTOM" relativeTo="$parentGroupLine" relativePoint="TOP" x="0" y="0"/>
+						</Anchors>
+						<Frames>
+							<Button name="$parent1" parentKey="WARRIOR" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent2" parentKey="ROGUE" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent3" parentKey="PRIEST" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent4" parentKey="MAGE" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent5" parentKey="WARLOCK" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent6" parentKey="HUNTER" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent7" parentKey="DRUID" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent8" parentKey="SHAMAN" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent9" parentKey="PALADIN" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent10" parentKey="DEATHKNIGHT" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+							<Button name="$parent11" parentKey="MONK" frameLevel="14" inherits="InvenRaidFrames3ManagerGroupButtonTemplate"/>
+						</Frames>
+					</Frame>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						self.header:SetPoint("LEFT", self:GetParent().bg, 0, 0)
+						self.header:SetPoint("RIGHT", self:GetParent().bg, 0, 0)
+						local function newParent(frame)
+							frame:SetParent(self)
+							frame:SetFrameLevel(12)
+						end
+						self.markerButton = CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton
+						newParent(self.markerButton)
+						self.markerButton:ClearAllPoints()
+						self.markerButton:SetPoint("BOTTOMRIGHT", self.hideButton, "TOPRIGHT", 0, 0)
+						self.readyCheckButton = CompactRaidFrameManagerDisplayFrameLeaderOptionsInitiateReadyCheck
+						newParent(self.readyCheckButton)
+						self.readyCheckButton:ClearAllPoints()
+						self.readyCheckButton:SetPoint("BOTTOMLEFT", self.lockButton, "TOPLEFT", 0, 0)
+						self.readyCheckButton:SetPoint("RIGHT", self.markerButton, "LEFT", -2, 0)
+						self.rolePollButton = CompactRaidFrameManagerDisplayFrameLeaderOptionsInitiateRolePoll
+						newParent(self.rolePollButton)
+						self.rolePollButton:ClearAllPoints()
+						self.rolePollButton:SetPoint("BOTTOMLEFT", self.readyCheckButton, "TOPLEFT", 0, 0)
+						self.rolePollButton:SetPoint("BOTTOMRIGHT", self.markerButton, "TOPRIGHT", 0, 0)
+						for i = 1, NUM_RAID_ICONS do
+							newParent(_G["CompactRaidFrameManagerDisplayFrameRaidMarkersRaidMarker"..i])
+						end
+						newParent(CompactRaidFrameManagerDisplayFrameRaidMarkersRaidMarkerRemove)
+						CompactRaidFrameManagerDisplayFrameRaidMarkersRaidMarker1:ClearAllPoints()
+						CompactRaidFrameManagerDisplayFrameRaidMarkersRaidMarker1:SetPoint("BOTTOMLEFT", self.rolePollButton, "TOPLEFT", 8, 30)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="$parentToggleButton" parentKey="toggleButton" frameLevel="13">
+				<Size x="16" y="64"/>
+				<Anchors>
+					<Anchor point="RIGHT" x="-2" y="0"/>
+				</Anchors>
+				<NormalTexture file="Interface\RaidFrame\RaidPanel-Toggle" parentKey="normal">
+					<TexCoords left="0" right="0.5" top="0" bottom="1"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\RaidFrame\RaidPanel-Toggle" parentKey="pushed">
+					<TexCoords left="0" right="0.5" top="0" bottom="1"/>
+				</PushedTexture>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

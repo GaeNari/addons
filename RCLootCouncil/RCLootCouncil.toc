@@ -1,0 +1,17 @@
+## Author: Potdisc
+## Maintainer: Potdisc and Eriner
+## Interface: 60200
+## Notes: Interface for running a Loot Council v1.7.3
+## SavedVariables: RCLootCouncilDB
+## Title: RCLootCouncil
+## Version: 1.7.3
+## DefaultState: enabled
+
+embeds.xml
+Mainframe.xml
+RCLootFrame.xml
+RCRankFrame.xml
+RCVersionFrame.xml
+RCLootHistory.xml
+options.lua
+RCArmorTokenData.lua

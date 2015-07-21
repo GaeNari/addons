@@ -1,0 +1,8 @@
+2015-06-25  elchefe  <elchefe>
+
+[e0c142b6073f] [v4.50]
+* .hgtags:
+
+Removed tag v4.50
+
+

@@ -1,0 +1,24 @@
+﻿## Interface: 60200
+## Title: Inven Raid Frames 3
+## Notes: 인벤 레이드 프레임 3
+## X-Category: UnitFrame
+## Author: Inven - InTheBlue, Inven - 다시날아
+## Version: 1.7.0
+## X-Website: http://wow.inven.co.kr
+## SavedVariables: InvenRaidFrames3DB
+## SavedVariablesPerCharacter: InvenRaidFrames3CharDB
+## OptionalDeps: LibSharedMedia-3.0, LibMapButton-1.1, LibDataBroker-1.1
+
+libs.xml
+
+Core.lua
+Profile.lua
+Media.lua
+Member.lua
+
+modules.xml
+Template.xml
+
+Pet.lua
+GroupHeader.lua
+Manager.lua

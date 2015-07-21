@@ -1,0 +1,10 @@
+## Interface: 60200
+## Title: Dominos ActionSets
+## Notes: Action bar profiles for Dominos
+## Author: Tuller
+## Dependencies: Dominos
+## DefaultState: disabled
+flyoutHelper.lua
+mountHelper.lua
+setActionHelper.lua
+main.lua

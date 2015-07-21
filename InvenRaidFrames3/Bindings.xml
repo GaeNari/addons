@@ -1,0 +1,26 @@
+<Bindings>
+	<Binding name="INVENRAIDFRAMES3_OPTION" header="INVENRAIDFRAMES3" category="ADDONS">
+		InvenRaidFrames3:OnClick("LeftButton")
+	</Binding>
+	<Binding name="CLICK InvenRaidFrames3Overlord:LeftButton" category="ADDONS"/>
+	<Binding name="INVENRAIDFRAMES3_DOREADYCHECK" category="ADDONS">
+		if InvenRaidFrames3:IsLeader() then
+			DoReadyCheck()
+		end
+	</Binding>
+	<Binding name="INVENRAIDFRAMES3_INITIATEROLEPOLL" category="ADDONS">
+		if InvenRaidFrames3:IsLeader() then
+			InitiateRolePoll()
+		end
+	</Binding>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker0:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker1:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker2:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker3:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker4:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker5:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker6:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker7:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker8:LeftButton" category="ADDONS"/>
+	<Binding name="CLICK InvenRaidFrames3WorldMarker9:LeftButton" category="ADDONS"/>
+</Bindings>

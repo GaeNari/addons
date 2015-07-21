@@ -1,0 +1,26 @@
+## Interface: 60200
+## Title: Skada: Ultimate
+## Notes: Modular damage meter.
+## Notes-koKR: 데미지 미터 모듈입니다.
+## Author: nBlueWiz (Original: Zarnivoop)
+## Version: r141
+## SavedVariables: SkadaDB
+## SavedVariablesPerCharacter: SkadaPerCharDB, SkadaVersion
+
+## OptionalDeps: Ace3, LibSharedMedia-3.0, LibWindow-1.1, LibDBIcon-1.0, AceGUI-3.0-SharedMediaWidgets, LibDualSpec-1.0
+
+## X-License: MIT/X
+## X-Category: Combat
+
+embeds.xml
+
+locale\enUS.lua
+locale\koKR.lua
+
+Loader.lua
+SkadaU.lua
+Menus.lua
+Options.lua
+BarDisplay.lua
+
+modules.xml
